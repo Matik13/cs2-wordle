@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSordle</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>CSordle</h1>
+        <h2>Zgadnij broń z Counter-Strike 2</h2>
+        <input list="weapons" id="weaponInput" placeholder="Wprowadź nazwę broni..." autocomplete="off">
+        <datalist id="weapons">
+            <!-- podpowiedzi są tu generowane js'ikiem -->
+        </datalist>
+        <button id="guessButton">Zgadnij</button>
+
+        <div id="attributes" class="hidden">
+            <h2>Twoje próby:</h2>
+            <table>
+                <tr>
+                    <th>Nazwa</th>
+                    <th>Cena</th>
+                    <th>Nagroda za zabójstwo</th>
+                    <th>Obrażenia</th>
+                    <th>Przebicie pancerza</th>
+                    <th>Szybkość strzelania</th>
+                    <th>Magazynek</th>
+                    <th>Zapas amunicji</th>
+                    <th>Mobilność</th>
+                    <th>Tryb automatyczny</th>
+                    <th>Pociski smugowe</th>
+                </tr>
+                <tbody id="guesses">
+                </tbody>
+            </table>
+        </div>
+
+
+        <div id="resultMessage" class="hidden"></div>
+        <button id="playAgainButton" class="hidden">Zagraj ponownie</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
