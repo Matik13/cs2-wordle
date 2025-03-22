@@ -1,1 +1,1 @@
-https://matik13.github.io/CSordle/
+https://matik13.github.io/cs2-wordle/
