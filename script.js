@@ -300,7 +300,7 @@ const weapons = [
 	},
 	{
 		name: 'FAMAS',
-		price: 2050,
+		price: 1950,
 		killAward: 300,
 		damage: 30,
 		armorPenetration: 70.0,
@@ -380,7 +380,7 @@ const weapons = [
 		name: 'G3SG1',
 		price: 5000,
 		killAward: 300,
-		damage: 50,
+		damage: 80,
 		armorPenetration: 82.5,
 		fireRate: 240.0,
 		magazineSize: 20,
@@ -393,7 +393,7 @@ const weapons = [
 		name: 'SCAR-20',
 		price: 5000,
 		killAward: 300,
-		damage: 50,
+		damage: 80,
 		armorPenetration: 82.5,
 		fireRate: 240.0,
 		magazineSize: 20,
@@ -459,7 +459,17 @@ const resultMessage = document.getElementById('resultMessage')
 const playAgainButton = document.getElementById('playAgainButton')
 const comparisonBody = document.getElementById('comparisonBody')
 
+weaponInput.addEventListener('keypress', function (event) {
+	if (event.key === 'Enter') {
+		guessWeapon()
+	}
+})
+
 guessButton.addEventListener('click', function () {
+	guessWeapon()
+})
+
+function guessWeapon() {
 	const guess = weaponInput.value.toLowerCase()
 	const guessedWeapon = weapons.find(weapon => weapon.name.toLowerCase() === guess)
 
@@ -467,9 +477,10 @@ guessButton.addEventListener('click', function () {
 		compareWeapons(guessedWeapon)
 		attributesDiv.classList.remove('hidden')
 	} else {
-		alert('Ni mo takiej broni XD')
+		alert('Nie ma takiej broni')
 	}
-})
+	weaponInput.value = ''
+}
 
 function compareWeapons(guessedWeapon) {
 	const resultRow = document.createElement('tr')
@@ -490,7 +501,15 @@ function compareWeapons(guessedWeapon) {
 
 	attributes.forEach(attr => {
 		const td = document.createElement('td')
-		if (guessedWeapon[attr] === randomWeapon[attr]) {
+		let guessedValue = guessedWeapon[attr]
+		let randomValue = randomWeapon[attr]
+
+		if (attr === 'fullAuto') {
+			guessedValue = guessedValue ? 'Tak' : 'Nie'
+			randomValue = randomValue ? 'Tak' : 'Nie'
+		}
+
+		if (guessedValue === randomValue) {
 			td.classList.add('green')
 		} else {
 			td.classList.add('red')
@@ -498,7 +517,6 @@ function compareWeapons(guessedWeapon) {
 		if (typeof guessedWeapon[attr] === 'number') {
 			if (guessedWeapon[attr] > randomWeapon[attr]) {
 				td.classList.add('down')
-				console.log(td)
 			} else if (guessedWeapon[attr] < randomWeapon[attr]) {
 				td.classList.add('up')
 			}
@@ -506,7 +524,7 @@ function compareWeapons(guessedWeapon) {
 		if (attr == 'price' || attr == 'killAward') {
 			td.classList.add('dolar')
 		}
-		td.textContent = guessedWeapon[attr]
+		td.textContent = guessedValue
 		resultRow.appendChild(td)
 	})
 
